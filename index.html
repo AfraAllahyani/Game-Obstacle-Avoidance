@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obstacles Game</title>
+</head>
+<body>
+    <script>
+    let gird;
+    let array = [];
+    let Obs = [];
+    
+    for (let i = 0; i < 36; i++) {
+        
+        gird = document.createElement("div");
+        gird.style.width = "50px";
+        gird.style.height = "50px";
+        
+         if(i == 35 ){
+        gird.style.backgroundColor = "purple";
+        }
+        
+        else {
+        gird.style.backgroundColor = "grey";
+        }
+        gird.style.margin = "10px";
+        
+        gird.style.display = "inline-block";
+        document.body.appendChild(gird);
+        array[i] = gird;
+        console.log(array[i])
+        
+        if ((i+1) % 6 == 0) {
+            document.write("<br>");
+        }
+    }
+
+    let winPosition= Math.floor(Math.random()*34)
+    console.log(winPosition)
+     let winBlock = array[winPosition]
+     winBlock.style.background="green"
+     for(let i = 0 ; i<6 ;i++){
+        let  obsPosition= Math.floor(Math.random() * 36);
+           if( obsPosition != winPosition && obsPosition != winPosition-1 && obsPosition != winPosition +1 && obsPosition != 35 && obsPosition != 29 ){
+           Obs[i]=array[obsPosition]
+           Obs[i].style.background="red"
+        }
+        continue;
+        
+     }
+     let newP= 35;
+     let currentP =35;
+     let win;
+     let lost;
+     let newobj=array[newP]
+     let currentobj = array[currentP];
+
+     document.addEventListener("keydown", keyDown);
+        function keyDown(e){
+    if(e.key === "ArrowUp" || e.key === "Up"){
+        newP-=6
+        newobj = array[newP]
+        if (newobj.style.background !="red" && newobj.style.background !="green") {
+            currentobj=array[currentP];
+            currentP-=6;
+        currentobj.style.background="grey";
+        newobj.style.background="purple";
+        }
+         else if (newobj.style.background=="red") {
+            lost =  setInterval(function(){  alert("Oops!! you lost")
+                 clearInterval(lost) } , 1000);
+        }
+        else if (newobj==winBlock) {
+            win =  setInterval(function(){  alert("!!Congratulations!! YOU WIN")
+                 clearInterval(win) } , 1000);
+                 currentobj=array[currentP]
+            currentobj.style.background="white";
+            newobj.style.background="white";
+        } 
+    }
+    else if(e.key === "ArrowDown" || e.key === "Down"){
+        newP+=6
+        newobj = array[newP]
+        if (newobj.style.background !="red" & newobj.style.background !="green") {
+            currentobj=array[currentP]
+            currentP+=6
+        currentobj.style.background="grey";
+        newobj.style.background="purple";
+        }
+         else if (newobj.style.background=="red") {
+            lost =  setInterval(function(){  alert("Oops!! you lost")
+                 clearInterval(lost) } , 1000);
+        }
+         else if (newobj==winBlock) {
+            win =  setInterval(function(){  alert("!!Congratulations!! YOU WIN")
+                 clearInterval(win) } , 1000);
+                 currentobj=array[currentP]
+            currentobj.style.background="white";
+            newobj.style.background="white";
+        }  
+    }
+    else if(e.key === "ArrowRight" || e.key === "Right"){
+        newP+=1
+        newobj = array[newP]
+        if (newobj.style.background !="red" & newobj.style.background !="green") {
+            currentobj=array[currentP]
+            currentP+=1
+        currentobj.style.background="grey";
+        newobj.style.background="purple";
+        }
+         else if (newobj.style.background=="red") {
+            lost =  setInterval(function(){  alert("Oops!! you lost")
+                 clearInterval(lost) } , 1000);
+        }
+        else if (newobj==winBlock) {
+            win =  setInterval(function(){  alert("!!Congratulations!! YOU WIN")
+                 clearInterval(win) } , 1000);
+                 currentobj=array[currentP]
+            currentobj.style.background="white";
+            newobj.style.background="white";
+        } 
+    }
+    else if(e.key === "ArrowLeft" || e.key === "Left"){
+        newP-=1
+        newobj = array[newP]
+        if (newobj.style.background !="red" & newobj.style.background !="green") {
+            currentobj=array[currentP]
+            currentP-=1
+        currentobj.style.background="grey";
+        newobj.style.background="purple";
+        }
+         else if (newobj.style.background=="red") {
+            lost =  setInterval(function(){  alert("Oops!! you lost")
+                 clearInterval(lost) } , 1000);
+        }
+        else if (newobj==winBlock) {
+            win =  setInterval(function(){  alert("!!Congratulations!! YOU WIN")
+                 clearInterval(win) } , 1000);
+                 currentobj=array[currentP]
+            currentobj.style.background="white";
+            newobj.style.background="white";
+        }    
+    }
+}
+    </script>
+</body>
+</html>
